@@ -1,10 +1,12 @@
 import './App.css';
-import txt from './pokenames.txt';
+//import readFile from './parseFile.js';
 
 import React from 'react';
 
 import Searchbar from './Components/Searchbar';
 import Results from './Components/Results';
+//import { cache, fetchFile } from './parseFile';
+
 
 class App extends React.Component {
   state = {
@@ -15,21 +17,35 @@ class App extends React.Component {
     loading: false,
     typeaheadRef: {},
     pokeNames: [],
-    resultPokemon: []
+    resultPokemon: [],
+    gifPokemon: {}
   };
 
   componentDidMount = () => {
-    console.log(txt);
-    fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=802", {
-      method: "GET",
-      mode: "cors"
-    })
-      .then(res => res.json())
-      .then(res => {console.log(res.results);
-        let pokemon = res.results.map(function(pokeObj){
-          return pokeObj.name;
-        });
-        this.setState({ pokeNames: pokemon }, () => {console.log(this.state.pokeNames)})});
+
+    const headers = new Headers ({
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    });
+    fetch(`./pokemodelURLs_alt.json`, {h:headers})
+    .then(res => res.json())
+    .then(res => {console.log(res);
+      let nameArr = Object.keys(res);
+      console.log(nameArr);
+      this.setState({ pokeNames : nameArr, gifPokemon : res})
+    });
+
+    // fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=802", {
+    //   method: "GET",
+    //   mode: "cors"
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {console.log(res.results);
+    //     let pokemon = res.results.map(function(pokeObj){
+    //       return pokeObj.name;
+    //     });
+    //     this.setState({ pokeNames: pokemon }, () => {console.log(this.state.pokeNames)})});
+    
   };
 
   handleSearch = e => {
@@ -49,7 +65,7 @@ class App extends React.Component {
       // .then(res => console.log(res.json()));
       .then(res => res.json())
       .then(res =>
-        {console.log(res)
+        {console.log(res);
         this.setState(
           {
             resultPokemon: [res],//this.state.resultPokemon.push(res),
@@ -61,6 +77,23 @@ class App extends React.Component {
           }
         )}
       );
+    // Attempting to implement gifs into the thing
+    console.log(this.state.searchValue);
+    // fetch("https://projectpokemon.org/images/normal-sprite/shuckle.gif", {
+    //   method: 'GET',
+    //   mode: 'no-cors'
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log(res);
+    //     this.setState({
+    //       gifPokemon: [res],
+    //       searchValue: ""
+    //     }, () => {
+    //       console.log(this.state.gifPokemon);
+    //       this.toggleLoading();
+    //     })
+    //   });
 
     e.preventDefault();
   };
@@ -77,7 +110,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Pokedex</h1>
+          <h1>Poké-Dextension</h1>
           <Searchbar
             handleSubmit={this.handleSubmit}
             handleSearch={this.handleSearch}
@@ -88,7 +121,7 @@ class App extends React.Component {
           />
           <Results
             resultPokemon={this.state.resultPokemon}
-
+            gifPokemon={this.state.gifPokemon}
           />
         </header>
       </div>

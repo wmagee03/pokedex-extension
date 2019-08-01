@@ -1,10 +1,11 @@
 import React from 'react';
 import pokeball from '../Pokeball.jpeg';
+//props.resultPokemon[0].sprites.front_default
 
 
 const Results = props => (
     <div className="outer">
-        <img src={props.resultPokemon.length> 0 ? props.resultPokemon[0].sprites.front_default : pokeball} alt="sprite" style={{width: "100px"}}></img>
+        <img src={props.resultPokemon.length > 0 ? props.gifPokemon[props.resultPokemon[0].name] : pokeball} alt="sprite" style={{width: "200px", margin: '10px'}}></img>
         <div className="main" style={props.resultPokemon.length === 0 ? {display: 'none'} : {display: 'block'}}>
             <div style={{fontSize: '5ex'}}>{props.resultPokemon.length > 0 ? props.resultPokemon[0].name[0].toUpperCase() + props.resultPokemon[0].name.slice(1) : ""}</div>
 
