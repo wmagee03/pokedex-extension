@@ -18,7 +18,8 @@ class App extends React.Component {
     typeaheadRef: {},
     pokeNames: [],
     resultPokemon: [],
-    gifPokemon: {}
+    gifPokemon: {},
+    evStats: []
   };
 
   componentDidMount = () => {
@@ -110,7 +111,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Poké-Dextension</h1>
+          <h1 style={{fontFamily: 'Pokemon-Title', fontWeight: '400'}}>Poké-Dextension</h1>
           <Searchbar
             handleSubmit={this.handleSubmit}
             handleSearch={this.handleSearch}

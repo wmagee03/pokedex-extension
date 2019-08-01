@@ -32,3 +32,14 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'Pokemon-Title';
+  src: url('./Pokemon Solid.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pokemon-VGStyle';
+  src: url('./jackster-productions_pokemon-gb/Pokemon GB.ttf')
+}
+

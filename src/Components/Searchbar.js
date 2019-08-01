@@ -76,7 +76,7 @@ class Searchbar extends React.Component {
                 options={this.props.pokeNames}
                 onInputChange={this.props.handleSearch}
                 onChange={this.props.handleSelect}
-                minLength={3}
+                minLength={2}
                 bsSize="large"
                 placeholder="Enter a Pokémon Name"
                 highlightOnlyResult
