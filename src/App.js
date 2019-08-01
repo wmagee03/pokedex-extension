@@ -9,7 +9,7 @@ import Results from './Components/Results';
 class App extends React.Component {
   state = {
     searchValue: "",
-    searchPlaceholder: "Enter song title",
+    searchPlaceholder: "Enter a Pokémon Name",
     resultsArr: [],
     resultsSong: "",
     loading: false,

@@ -12,7 +12,7 @@ const Styles = styled.div`
     display: none;
   }
   .text {
-    padding-left: 13px;
+    padding-left: 0px;
   }
 
   .dropdown-menu {
@@ -23,6 +23,19 @@ const Styles = styled.div`
   }
   .dropdown-item:hover {
     color: #000;
+  }
+
+  .form-control {
+    font-size: 30px;
+  }
+
+  .rbt-sr-status {
+    display: none;
+  }
+
+  .btn-outline-secondary {
+    margin: 10px
+    font-size: 15px;
   }
 
   @media (max-width: 480px) {
@@ -59,13 +72,13 @@ class Searchbar extends React.Component {
             <InputGroup className="mb-3" size="lg">
               <Typeahead
                 id="typeahead"
-                labelKey="song"
+                labelKey="pokemon"
                 options={this.props.pokeNames}
                 onInputChange={this.props.handleSearch}
                 onChange={this.props.handleSelect}
                 minLength={3}
                 bsSize="large"
-                placeholder="Enter song title..."
+                placeholder="Enter a Pokémon Name"
                 highlightOnlyResult
                 selectHintOnEnter
                 autoFocus
@@ -81,7 +94,6 @@ class Searchbar extends React.Component {
                     aria-hidden="true"
                     className={this.props.loading ? "" : "hidden"}
                   />
-                  <span className="sr-only">Loading...</span>
                   <span className="text">Search</span>
                 </Button>
               </InputGroup.Append>
