@@ -1,6 +1,6 @@
 {
-  "name": "Poke-Dextension",
-  "description": "Pokedex Chrome Extension",
+  "name": "Poké-Dextension",
+  "description": "Pokédex Chrome Extension",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
