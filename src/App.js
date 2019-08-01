@@ -1,8 +1,10 @@
 import './App.css';
+import txt from './pokenames.txt';
 
 import React from 'react';
 
 import Searchbar from './Components/Searchbar';
+import Results from './Components/Results';
 
 class App extends React.Component {
   state = {
@@ -11,17 +13,23 @@ class App extends React.Component {
     resultsArr: [],
     resultsSong: "",
     loading: false,
-    songList: [],
-    typeaheadRef: {}
+    typeaheadRef: {},
+    pokeNames: [],
+    resultPokemon: []
   };
 
   componentDidMount = () => {
-    fetch("https://realbookindex-api.herokuapp.com/", {
+    console.log(txt);
+    fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=802", {
       method: "GET",
       mode: "cors"
     })
       .then(res => res.json())
-      .then(res => this.setState({ songList: res.data }, () => {}));
+      .then(res => {console.log(res.results);
+        let pokemon = res.results.map(function(pokeObj){
+          return pokeObj.name;
+        });
+        this.setState({ pokeNames: pokemon }, () => {console.log(this.state.pokeNames)})});
   };
 
   handleSearch = e => {
@@ -35,40 +43,30 @@ class App extends React.Component {
 
   handleSubmit = e => {
     console.log(typeof this.state.searchValue);
+    console.log(e);
     this.toggleLoading();
-    fetch("https://realbookindex-api.herokuapp.com/", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title:
-          typeof this.state.searchValue === "object"
-            ? this.state.searchValue.toString()
-            : this.state.searchValue
-      })
-    })
+    fetch("https://pokeapi.co/api/v2/pokemon/" + this.state.searchValue)
       // .then(res => console.log(res.json()));
       .then(res => res.json())
       .then(res =>
+        {console.log(res)
         this.setState(
           {
-            resultsArr: res.data.length > 0 ? res.data : [],
-            resultsSong: res.data.length > 0 ? res.data[0].title : "Not Found",
+            resultPokemon: [res],//this.state.resultPokemon.push(res),
             searchValue: ""
           },
           () => {
+            console.log(this.state.resultPokemon);
             this.toggleLoading();
           }
-        )
+        )}
       );
 
     e.preventDefault();
   };
 
   handleClear = () => {
-    this.setState({ resultsArr: [], resultsSong: "", searchValue: "" }, () => {
+    this.setState({ searchValue: "" }, () => {
       this.handleSearch("");
     });
   };
@@ -86,7 +84,11 @@ class App extends React.Component {
             handleSelect={this.handleSelect}
             searchValue={this.state.searchValue}
             loading={this.state.loading}
-            songList={this.state.songList}
+            pokeNames={this.state.pokeNames}
+          />
+          <Results
+            resultPokemon={this.state.resultPokemon}
+
           />
         </header>
       </div>

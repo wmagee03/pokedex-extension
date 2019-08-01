@@ -60,7 +60,7 @@ class Searchbar extends React.Component {
               <Typeahead
                 id="typeahead"
                 labelKey="song"
-                options={this.props.songList}
+                options={this.props.pokeNames}
                 onInputChange={this.props.handleSearch}
                 onChange={this.props.handleSelect}
                 minLength={3}
