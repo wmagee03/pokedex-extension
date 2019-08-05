@@ -31,7 +31,9 @@ class App extends React.Component {
     fetch(`./pokemodelURLs_alt.json`, {h:headers})
     .then(res => res.json())
     .then(res => {console.log(res);
-      let nameArr = Object.keys(res);
+      let nameArr = Object.keys(res).map((name) => {
+        return name[0].toUpperCase() + name.slice(1);
+      });
       console.log(nameArr);
       this.setState({ pokeNames : nameArr, gifPokemon : res})
     });
@@ -62,7 +64,7 @@ class App extends React.Component {
     console.log(typeof this.state.searchValue);
     console.log(e);
     this.toggleLoading();
-    fetch("https://pokeapi.co/api/v2/pokemon/" + this.state.searchValue)
+    fetch("https://pokeapi.co/api/v2/pokemon/" + this.state.searchValue[0].toLowerCase() + this.state.searchValue.slice(1))
       // .then(res => console.log(res.json()));
       .then(res => res.json())
       .then(res =>

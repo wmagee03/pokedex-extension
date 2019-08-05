@@ -41,14 +41,14 @@ const Results = props => (
                     return <div key={index} style={{fontFamily: 'Pokemon-VGStyle', fontSize: '15px', color: 'black'}}>{item.move.name}</div>}) : ""}
             </div>
 
-            <div style={{fontFamily: 'Pokemon-VGStyle', marginTop: '40px'}}>{props.resultPokemon.length > 0 ? "STAT CALCULATION" : ""}</div>
-            <div style={{border: 'inset', borderColor: 'blue', height:'200px', width: '400px', backgroundColor: 'white',  marginBottom: '40px'}}>
+            <div style={{fontFamily: 'Pokemon-VGStyle', marginTop: '40px'}}>{props.resultPokemon.length > 0 ? "BASE STATS" : ""}</div>
+            <div style={{border: 'inset', borderColor: 'blue', height:'150px', width: '400px', backgroundColor: 'white',  marginBottom: '40px'}}>
                 {props.resultPokemon.length > 0 ? props.resultPokemon[0].stats.map(function(item, index) {
                     return <div key={index}>
-                                <span style={{paddingRight: "10px", width: "10px"}}>
+                                {/* <span style={{paddingRight: "10px", width: "10px"}}>
                                     <input style={{border: 'inset'}} type={"number"} maxLength={3} defaultValue={0} max={255} min={0}>
                                     </input>
-                                </span>
+                                </span> */}
                                 <span style={{fontFamily: 'Pokemon-VGStyle', color: 'black', fontSize: '15px'}}>{item.stat.name + ": " + item.base_stat}</span>
                         </div>}) : ""}
             </div>

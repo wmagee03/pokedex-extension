@@ -43,3 +43,20 @@
   src: url('./jackster-productions_pokemon-gb/Pokemon GB.ttf')
 }
 
+#typeahead {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#typeahead a {
+  text-decoration: none;
+}
+#typeahead li {
+  margin: 4px 0;
+}
+.rbt-input {
+  border-radius: 10px;
+}
+.form-control {
+  font-size: 25px;
+}
