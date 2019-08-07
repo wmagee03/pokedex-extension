@@ -5,7 +5,7 @@ import React from 'react';
 
 import Searchbar from './Components/Searchbar';
 import Results from './Components/Results';
-//import { cache, fetchFile } from './parseFile';
+
 
 
 class App extends React.Component {
